@@ -19,8 +19,8 @@ public class ProfilePage {
     /**
      * определение локатора меню пользователя
      */
-    @FindBy(xpath = "//*[contains(@class, 'user-account user-account_has-ticker_yes user-account_has-accent-letter_yes legouser__current-account i-bem')]")
-    private WebElement userMenu;
+    @FindBy(xpath = "//*[contains(@class, 'personal-info-login__text personal-info-login__text_decorated')]")
+    private WebElement userLogin;
 
     @FindBy(xpath = "//*[contains(@class, 'user-account user-account_has-ticker_yes user-account_has-accent-letter_yes legouser__current-account i-bem')]")
     private WebElement userIcon;
@@ -35,7 +35,7 @@ public class ProfilePage {
      * метод для получения имени пользователя из меню пользователя
      */
     public String getUserName() {
-        String userName = userMenu.getText();
+        String userName = userLogin.getText();
         return userName;
     }
 
@@ -43,7 +43,7 @@ public class ProfilePage {
      * метод для нажатия кнопки меню пользователя
      */
     public void entryMenu() {
-        userMenu.click();
+        userIcon.click();
     }
 
     /**
