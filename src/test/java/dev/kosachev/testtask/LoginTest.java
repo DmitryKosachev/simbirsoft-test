@@ -15,6 +15,8 @@ public class LoginTest {
 
     public static LoginPage loginPage;
     public static ProfilePage profilePage;
+    public static MailPage mailPage;
+
     public static WebDriver driver;
 
     @BeforeAll
@@ -22,9 +24,10 @@ public class LoginTest {
 
 
         //определение пути до драйвера и его настройка
-        System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("firefoxdriver"));
+//        System.setProperty("webdriver.gecko.driver", ConfProperties.getProperty("firefoxdriver"));
+        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         //создание экземпляра драйвера
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         //окно разворачивается на полный экран
         driver.manage().window().maximize();
         //задержка на выполнение теста = 10 сек.
@@ -34,12 +37,13 @@ public class LoginTest {
 
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
+        mailPage = new MailPage(driver);
     }
 
     @AfterAll
     public static void tearDown() {
-        profilePage.entryMenu();
-        profilePage.userLogout();
+        mailPage.entryMenu();
+        mailPage.userLogout();
         driver.quit();
     }
 
@@ -55,10 +59,25 @@ public class LoginTest {
         loginPage.inputPasswd(ConfProperties.getProperty("password"));
         //нажимаем кнопку входа
         loginPage.clickLoginBtn();
+
         //получаем отображаемый логин
         String user = profilePage.getUserName();
         //и сравниваем его с логином из файла настроек
         Assertions.assertEquals(ConfProperties.getProperty("login"), user);
+        profilePage.entryMenu();
+        profilePage.entryMail();
+        mailPage.search("Simbirsoft Тестовое задание");
+        String searchResult = mailPage.getResult();
+        mailPage.sendMail("kosachdmi@yandex.ru","Simbirsoft Тестовое задание. Косачёв",searchResult);
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
+
+
 
 }

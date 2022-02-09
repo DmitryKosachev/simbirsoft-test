@@ -22,14 +22,11 @@ public class ProfilePage {
     @FindBy(xpath = "//*[contains(@class, 'personal-info-login__text personal-info-login__text_decorated')]")
     private WebElement userLogin;
 
-    @FindBy(xpath = "//*[contains(@class, 'user-account user-account_has-ticker_yes user-account_has-accent-letter_yes legouser__current-account i-bem')]")
+    @FindBy(xpath = "//*[contains(@class, 'legouser legouser_fetch-accounts_yes legouser_hidden_yes i-bem')]")
     private WebElement userIcon;
 
-    /**
-     * определение локатора кнопки выхода из аккаунта
-     */
-    @FindBy(xpath = "//*[contains(@class, 'menu__item menu__item_type_link legouser__menu-item legouser__menu-item_action_exit')]")
-    private WebElement logoutBtn;
+    @FindBy(xpath = "//*[contains(@class, 'menu__item menu__item_type_link legouser__menu-item legouser__menu-item_action_mail')]")
+    private WebElement mailBtn;
 
     /**
      * метод для получения имени пользователя из меню пользователя
@@ -46,10 +43,7 @@ public class ProfilePage {
         userIcon.click();
     }
 
-    /**
-     * метод для нажатия кнопки выхода из аккаунта
-     */
-    public void userLogout() {
-        logoutBtn.click();
+    public void entryMail() {
+        mailBtn.click();
     }
 }
