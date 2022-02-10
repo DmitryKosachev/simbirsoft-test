@@ -66,10 +66,13 @@ public class LoginTest {
         Assertions.assertEquals(ConfProperties.getProperty("login"), user);
         profilePage.entryMenu();
         profilePage.entryMail();
+        //ищем нужные нам письма
         mailPage.search("Simbirsoft Тестовое задание");
+        //передаем найденное колличество
         String searchResult = mailPage.getResult();
+        //пишем письмо
         mailPage.sendMail("kosachdmi@yandex.ru","Simbirsoft Тестовое задание. Косачёв",searchResult);
-
+        //тест работал нестабильно, не успевая загрузить страницу полностью
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
