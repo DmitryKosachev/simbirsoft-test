@@ -42,7 +42,7 @@ public class ProfilePage {
     public void entryMenu() {
         userIcon.click();
     }
-
+    //нажатие на отправку письма
     public void entryMail() {
         mailBtn.click();
     }
